@@ -1,0 +1,329 @@
+{
+  "absolutePath": "wei.sol",
+  "exportedSymbols":
+  {
+    "EtherUnits":
+    [
+      18
+    ]
+  },
+  "id": 19,
+  "license": "MIT",
+  "nodeType": "SourceUnit",
+  "nodes":
+  [
+    {
+      "id": 1,
+      "literals":
+      [
+        "solidity",
+        "^",
+        "0.8",
+        ".10"
+      ],
+      "nodeType": "PragmaDirective",
+      "src": "32:24:0"
+    },
+    {
+      "abstract": false,
+      "baseContracts": [],
+      "canonicalName": "EtherUnits",
+      "contractDependencies": [],
+      "contractKind": "contract",
+      "fullyImplemented": true,
+      "id": 18,
+      "linearizedBaseContracts":
+      [
+        18
+      ],
+      "name": "EtherUnits",
+      "nameLocation": "67:10:0",
+      "nodeType": "ContractDefinition",
+      "nodes":
+      [
+        {
+          "constant": false,
+          "functionSelector": "4fb2e0be",
+          "id": 4,
+          "mutability": "mutable",
+          "name": "oneWei",
+          "nameLocation": "96:6:0",
+          "nodeType": "VariableDeclaration",
+          "scope": 18,
+          "src": "84:26:0",
+          "stateVariable": true,
+          "storageLocation": "default",
+          "typeDescriptions":
+          {
+            "typeIdentifier": "t_uint256",
+            "typeString": "uint256"
+          },
+          "typeName":
+          {
+            "id": 2,
+            "name": "uint",
+            "nodeType": "ElementaryTypeName",
+            "src": "84:4:0",
+            "typeDescriptions":
+            {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            }
+          },
+          "value":
+          {
+            "hexValue": "31",
+            "id": 3,
+            "isConstant": false,
+            "isLValue": false,
+            "isPure": true,
+            "kind": "number",
+            "lValueRequested": false,
+            "nodeType": "Literal",
+            "src": "105:5:0",
+            "subdenomination": "wei",
+            "typeDescriptions":
+            {
+              "typeIdentifier": "t_rational_1_by_1",
+              "typeString": "int_const 1"
+            },
+            "value": "1"
+          },
+          "visibility": "public"
+        },
+        {
+          "constant": false,
+          "functionSelector": "28dc556f",
+          "id": 9,
+          "mutability": "mutable",
+          "name": "isOneWei",
+          "nameLocation": "155:8:0",
+          "nodeType": "VariableDeclaration",
+          "scope": 18,
+          "src": "143:33:0",
+          "stateVariable": true,
+          "storageLocation": "default",
+          "typeDescriptions":
+          {
+            "typeIdentifier": "t_bool",
+            "typeString": "bool"
+          },
+          "typeName":
+          {
+            "id": 5,
+            "name": "bool",
+            "nodeType": "ElementaryTypeName",
+            "src": "143:4:0",
+            "typeDescriptions":
+            {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            }
+          },
+          "value":
+          {
+            "commonType":
+            {
+              "typeIdentifier": "t_uint8",
+              "typeString": "uint8"
+            },
+            "id": 8,
+            "isConstant": false,
+            "isLValue": false,
+            "isPure": true,
+            "lValueRequested": false,
+            "leftExpression":
+            {
+              "hexValue": "31",
+              "id": 6,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "166:5:0",
+              "subdenomination": "wei",
+              "typeDescriptions":
+              {
+                "typeIdentifier": "t_rational_1_by_1",
+                "typeString": "int_const 1"
+              },
+              "value": "1"
+            },
+            "nodeType": "BinaryOperation",
+            "operator": "==",
+            "rightExpression":
+            {
+              "hexValue": "31",
+              "id": 7,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "175:1:0",
+              "typeDescriptions":
+              {
+                "typeIdentifier": "t_rational_1_by_1",
+                "typeString": "int_const 1"
+              },
+              "value": "1"
+            },
+            "src": "166:10:0",
+            "typeDescriptions":
+            {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            }
+          },
+          "visibility": "public"
+        },
+        {
+          "constant": false,
+          "functionSelector": "d297a89f",
+          "id": 12,
+          "mutability": "mutable",
+          "name": "oneEther",
+          "nameLocation": "195:8:0",
+          "nodeType": "VariableDeclaration",
+          "scope": 18,
+          "src": "183:30:0",
+          "stateVariable": true,
+          "storageLocation": "default",
+          "typeDescriptions":
+          {
+            "typeIdentifier": "t_uint256",
+            "typeString": "uint256"
+          },
+          "typeName":
+          {
+            "id": 10,
+            "name": "uint",
+            "nodeType": "ElementaryTypeName",
+            "src": "183:4:0",
+            "typeDescriptions":
+            {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            }
+          },
+          "value":
+          {
+            "hexValue": "31",
+            "id": 11,
+            "isConstant": false,
+            "isLValue": false,
+            "isPure": true,
+            "kind": "number",
+            "lValueRequested": false,
+            "nodeType": "Literal",
+            "src": "206:7:0",
+            "subdenomination": "ether",
+            "typeDescriptions":
+            {
+              "typeIdentifier": "t_rational_1000000000000000000_by_1",
+              "typeString": "int_const 1000000000000000000"
+            },
+            "value": "1"
+          },
+          "visibility": "public"
+        },
+        {
+          "constant": false,
+          "functionSelector": "cf0f5d29",
+          "id": 17,
+          "mutability": "mutable",
+          "name": "isOneEther",
+          "nameLocation": "268:10:0",
+          "nodeType": "VariableDeclaration",
+          "scope": 18,
+          "src": "256:40:0",
+          "stateVariable": true,
+          "storageLocation": "default",
+          "typeDescriptions":
+          {
+            "typeIdentifier": "t_bool",
+            "typeString": "bool"
+          },
+          "typeName":
+          {
+            "id": 13,
+            "name": "bool",
+            "nodeType": "ElementaryTypeName",
+            "src": "256:4:0",
+            "typeDescriptions":
+            {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            }
+          },
+          "value":
+          {
+            "commonType":
+            {
+              "typeIdentifier": "t_uint64",
+              "typeString": "uint64"
+            },
+            "id": 16,
+            "isConstant": false,
+            "isLValue": false,
+            "isPure": true,
+            "lValueRequested": false,
+            "leftExpression":
+            {
+              "hexValue": "31",
+              "id": 14,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "281:7:0",
+              "subdenomination": "ether",
+              "typeDescriptions":
+              {
+                "typeIdentifier": "t_rational_1000000000000000000_by_1",
+                "typeString": "int_const 1000000000000000000"
+              },
+              "value": "1"
+            },
+            "nodeType": "BinaryOperation",
+            "operator": "==",
+            "rightExpression":
+            {
+              "hexValue": "31653138",
+              "id": 15,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "292:4:0",
+              "typeDescriptions":
+              {
+                "typeIdentifier": "t_rational_1000000000000000000_by_1",
+                "typeString": "int_const 1000000000000000000"
+              },
+              "value": "1e18"
+            },
+            "src": "281:15:0",
+            "typeDescriptions":
+            {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            }
+          },
+          "visibility": "public"
+        }
+      ],
+      "scope": 19,
+      "src": "58:241:0",
+      "usedErrors": []
+    }
+  ],
+  "src": "32:268:0"
+}
