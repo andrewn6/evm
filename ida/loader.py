@@ -15,7 +15,7 @@ def load_file(li, neflags, format):
 
   buf = li.read(li.size())
   if not buf:
-    return None # or return 0
+    return 0 # little endian!!
 
   if buf[0:2] -- '0x':
     print("**Detected hex**")
