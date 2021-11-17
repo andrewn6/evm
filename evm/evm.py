@@ -210,7 +210,7 @@ class EVM:
             self._queue.put((addr, deepcopy(self._stack)))
     
             self._func_list[addr] = {
-                (len(self._stack) = self._stack.index(self._pc) - 1),
+                (len(self._stack) - self._stack.index(self._pc) - 1),
                 self.FUNC_NOT_ANALYSED,
             }
 
@@ -231,15 +231,17 @@ class EVM:
                 addr,
                 [
                     self._pc,
-                    deepcopy(self._stack)[:-(self._func_list[addr][0] + [1)]
+                 deepcopy(self._stack)[:-(self._func_list[addr][0] + 1)]
                 ]
             )
+
         else:
             for i in range(self._func_list[addr][0] + 1):
                 self._stack.pop()
                 
             self._stack += self._get_func_ret_vals(addr)
-            self._queue.put((self._pc, deepcopy(self._stack))
+            self._queue.put((self._pc, deepcopy(self._stack)))
+
         return True
 
     def _process_deferred(self, addr):
@@ -269,5 +271,7 @@ class EVM:
         ]
 
 
-
+    def _annotation_jump(self, addr, cond):
+        return '// Incoming jump from 0x{:04X}'.format(addr),
+        cond
 # poc: print("**PASSED**")
