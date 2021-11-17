@@ -185,3 +185,89 @@ class EVM:
             dict[k] = []
         if v not in dict[k]:
             dict[k].append(v)
+
+    def _check_visited(self):
+        if self._pc not in self._visited:
+            return True
+        
+        if self._visited[self._pc][1] < self.MAX_DISASSEMBLE_TRIES: 
+            return True
+        
+        else:
+            return False
+
+    def _mark_visited(self, inst):  
+        if self._pc not in self._visited:   
+            self._visited[self._pc] = [inst, 0]
+        else:
+            self._visited[self._pc][1] += 1
+
+    def _is_function(self, addr):
+        if self._pc not in self._stack: 
+            return False
+        
+        if addr not in self._func_list: 
+            self._queue.put((addr, deepcopy(self._stack)))
+    
+            self._func_list[addr] = {
+                (len(self._stack) = self._stack.index(self._pc) - 1),
+                self.FUNC_NOT_ANALYSED,
+            }
+
+        self._insert_entry_list_dict(
+            self._blocks,
+            addr,
+            self._annotation_call()
+        )
+        self._insert_entry_list_dict(
+            self._blocks,
+            self._pc,
+            self._annotation_return(addr)
+        )
+
+        if self._func_list[addr][1] == self.FUNC_NOT_ANALYSED:
+            self._insert_entry_list_dict(
+                self._deferred_analyis,
+                addr,
+                [
+                    self._pc,
+                    deepcopy(self._stack)[:-(self._func_list[addr][0] + [1)]
+                ]
+            )
+        else:
+            for i in range(self._func_list[addr][0] + 1):
+                self._stack.pop()
+                
+            self._stack += self._get_func_ret_vals(addr)
+            self._queue.put((self._pc, deepcopy(self._stack))
+        return True
+
+    def _process_deferred(self, addr):
+        for k, b in self._deferred_analysis.items():
+            for ret, stack in b:
+                if ret == addr:
+                    # Get length of stack then subtract it
+                    self._func_list[k][1] = \
+                        len(self._stack) - len(stack)
+
+                    if addr in self._stack:
+                        self._func_list[k][1] -= 1
+
+                    for e in b:
+                        e[1] += self._get_func_ret_vals(k)
+                        self._queue.put(e)
+
+                    del self._deferred_analysis[k]
+                    return True
+
+            return False
+
+    def _get_func_ret_vals(self, addr):
+        return [
+            'FUNC_{:04X}_{}'.format(addr, i)
+            for i in range(self._func_list[addr][1])
+        ]
+
+
+
+# poc: print("**PASSED**")
