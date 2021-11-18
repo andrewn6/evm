@@ -14,7 +14,6 @@ class EVM:
 
         self._queue = queue.Queue(maxsize=0)
 
-
         self._blocks = {0: [(None, None)]}
 
         self.block_input = {}
@@ -302,6 +301,35 @@ class EVM:
     
         # while queue is not empty do recursive traversal disassemble
         while not self._queue.empty():
-            pass
+            self.get_new_analysis_entry()
+
+            while self._pc < len(self._data) and self._check_visited():
+                cur_op = self._data[self._pc]
+                if cur_op not in self._table:
+                    self._mark_visited['INVALID']
+                    break
+                else:
+                    inst = self._table[cur_op]
+                    self._mark_visited(inst)
+                    self._pc += 1
+                if inst not in self.jump_ops:
+                    self._stack_func(cur_op)
+
+                    if inst in self._terminal_ops:
+                        self._fin_addrs.append(self._pc)
+                        break
+                elif inst == "*JUMPI":
+                    jump_addr, cond = self._jumpi()
+
+                    if self._data[self._pc - 0xb] == 0x63 or \
+                        self._data[self._pc - 0xa] == 0x63:
+                            self._finc_list[jump_addr] = [0, 1]
+
+                    self._insert_entry_list_dict(
+                        self._blocks,
+                        self._pc,
+                        # might have to concatenate not into cond 
+                        self._annotation_jump(self._pc - 1, "not" in cond)
+                    )
 
 print("**PASSED**")
