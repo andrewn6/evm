@@ -274,4 +274,34 @@ class EVM:
     def _annotation_jump(self, addr, cond):
         return '// Incoming jump from 0x{:04X}'.format(addr),
         cond
-# poc: print("**PASSED**")
+
+    def _annotation_call(self):
+        return (
+            '// Incoming call from 0x{:04X}, returns to 0x{:04X}'.format(
+            self._pc,
+            self._pc - 1
+        ),
+        None
+    )
+   
+    def _annotation_return(self, addr):
+        return (
+            '// Incoming return from call to 0x{:04X} at 0x{:04X}'.format(
+                addr,
+                self._pc - 1
+            ),
+            None
+        )
+    def disassemble(self):
+        self._recursive_run()
+        self.linear_run()
+        return self._visited, self._blocks, self._func_list
+    
+    def _recursive_run(self):
+        self._queue.put((0, []))
+    
+        # while queue is not empty do recursive traversal disassemble
+        while not self._queue.empty():
+            pass
+
+print("**PASSED**")
