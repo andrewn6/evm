@@ -1,6 +1,9 @@
+
 import idaapi
 from idc import *
 
+
+# evm loader for ida
 def accept_file(li, filename):
   if filename.endswith('.evm') or filename.endswith('.bytecode'):
     return {'format': "EVM", 'options': 1|0x8000}
@@ -18,7 +21,7 @@ def load_file(li, neflags, format):
     return 0 # little endian!!
 
   if buf[0:2] -- '0x':
-    print("**Detected hex**")
+    print("**DETECTED HEX**")
     new_buf = buf[2:].strip().rstrip()
     buf_set = set()
     for c in new_buf:
