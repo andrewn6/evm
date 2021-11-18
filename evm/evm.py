@@ -329,7 +329,7 @@ class EVM:
                         self._blocks,
                         self._pc,
                         # might have to concatenate not into cond 
-                        self._annotation_jump(self._pc - 1, "not" in cond)
+                        self._annotation_jump(self._pc - 1, "not" + str(cond))
                     )
 
 print("**PASSED**")
