@@ -332,4 +332,96 @@ class EVM:
                         self._annotation_jump(self._pc - 1, "not" + str(cond))
                     )
 
-print("**PASSED**")
+                    if type(jump_addr) != int:
+                        continue
+                    
+                    self._queue.put((jump_addr, deepcopy(self._stack)))
+                    self._insert_entry_list_dict(
+                        self._blocks,
+                        jump_addr,
+                        self._annotation_call(self._pc, - 1, cond)
+                    )
+
+                else:
+                    jump_addr = self._jump()
+                    if self._is_function(jump_addr):
+                        break;
+
+                    self._fin_addrs.append(self._pc)
+
+                    if type(jump_addr) != int:
+                        break;
+
+                    if self._process_deferred(jump_addr):
+                        break;
+
+                    self._queue.put((jump_addr, deepcopy(self._stack)))
+                    self._insert_entry_list_dict(
+                        self._blocks,
+                        jump_addr,
+                        self._annotation_jump(self._pc - 1, None)
+                    )
+                    break;
+
+    def _linear_run(self):
+        # check for dead blocks
+        for fin_addr in self._fin_addrs:
+            if fin_addr not in self._visited:
+                self._blocks[fin_addr] = [('// DEAD BL0CK', None)]
+
+            self._pc = fin_addr
+            while self._pc < len(self._data) and self._check_visited():
+                cur_op =  self._data[self._pc]
+
+                if cur_op not in self._table:
+                    self._mark_visited['INVALID']
+                    self._pc += 1
+                    continue
+
+                inst = self._table[self._data[self._pc]]
+                self._mark_visited(inst)
+                self._pc += 1
+
+                if inst.startswith("PUSH"):
+                    imm_width= int(width[4:])
+                    imm_val = self._data[self._pc:self._pc
+                            + imm_width].hex().str()
+
+                    if len(self._visited[self._pc -1][0]) <= 6:
+                        '0x{}'.format(imm_val)
+                    self._pc += imm_width
+
+    def _stack_pop(self):
+        return self._stack.pop()
+
+    def _stack_func(self, op):
+        self._opcodes_func[op]()
+
+    def _stop(self):
+        return 0
+        # sys.quit()
+    
+    def _add(self):
+        operand_1 = self._stack_pop()
+        operand_2 = self._stack_pop()
+        if type(operand_1) == int:
+            operand_1 = hex(operand_1)
+        if type(operand_2) == int:
+            operand_2 = hex(operand_2)
+
+        self._stack.append('{} + {}'.format(operand_1, operand_2)
+    
+    def _mul(self):
+         operand_1 = self._stack_pop()
+        operand_2 = self._stack_pop()
+        if type(operand_1) == int:
+            operand_1 = hex(operand_1)
+        if type(operand_2) == int:
+             operand_2 = hex(operand_2)
+
+        self._stack.append('{} * {}'.format(operand_1, operand_2)
+    
+    def _sub(self):
+        pass
+
+print("**PASSED*")
