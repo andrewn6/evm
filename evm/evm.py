@@ -498,7 +498,22 @@ class EVM:
         self._stack.append('({} + {}) % {}'.format(operand_1, operand_2, operand_3)) 
     
     def _mulmod(self):
-        pass 
+        operand_1 = self._stack_pop()
+        operand_2 = self._stack_pop()
+        operand_3 = self._stack_pop()
+
+        if type(operand_1) == int:
+            operand_1 == hex(operand_1)
+
+        if type(operand_2) == int:
+            operand_2 = hex(operand_2)
+
+        if type(operand_3) == int:
+            operand_3 = hex(operand_3)
+
+        self._stack.append('({} * {}) % {}'.format(operand_1, operand_2,
+            operand_3))
+
     
     def _exp(self):
         operand_1 = self._stack_pop()
@@ -533,7 +548,27 @@ class EVM:
 
         self._stack.append("{} < {}".format(operand_1, operand_2))
                 
-        
+    def _gt(self):
+        operand_1 = self._stack_pop()
+        operand_2 = self._stack_pop()
+        if type(operand_1) == int:
+            operand_1 = hex(operand_1)
+
+        if type(operand_2) == int:
+            operand_2 == hex(operand_2)
+
+        self._stack.append('{} > {}'.format(operand_1, operand_2))
+
+    def _slt(self):
+        operand_1 = self._stack_pop()
+        operand_2 = self._stack_pop()
+        if type(operand_1) == int:
+            operand_1 = hex(operand_1)
+
+        if type(operand_2) == int:
+            operand_2 = hex(operand_2)
+
+        self._stack.append('{} < {}'.format(operand_1, operand_2))
 
     
 print("**PASSED*")
