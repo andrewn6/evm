@@ -570,5 +570,36 @@ class EVM:
 
         self._stack.append('{} < {}'.format(operand_1, operand_2))
 
+    def _sgt(self):
+        operand_1 = self._stack_pop()
+        operand_2 = self._stack_pop()
+
+        if type(operand_1) == int:
+            operand_1 = hex(operand_1)
+
+        if type(operand_2) == int:
+            operand_2 = hex(operand_2)
+
+        self._stack.append('{} > {}'.format(operand_1, operand_2))
     
+    def _eq(self):
+        operand_1 = self._stack_pop()
+        operand_2 = self._stack_pop()
+
+        if type(operand_1) == int:
+            operand_1 = hex(operand_1)
+
+        if type(operand_2) == int:
+            operand_2 = hex(operand_2)
+
+        self._stack.append('{} == {}'.format(operand_1, operand_2))
+
+    def _iszero(self):
+        operand_1 = self._stack_pop()
+        
+        if type(operand_1) == int:
+            operand_1 == hex(operand_1)
+
+        self._stack.append("{} == 0".format(opereand_1))
+
 print("**PASSED*")
