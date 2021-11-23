@@ -1,4 +1,6 @@
 import sys
+import os
+import capstone
 from evm import EVM
 # import convert_bytecode
 

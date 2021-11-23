@@ -47,7 +47,7 @@ class EVM:
             11: self._signextend,
             16: self._lt,
             17: self._gt,
-            18: self_slt,
+            18: self._slt,
             19: self._sgt,
             20: self._eq,
             21: self._iszero,
@@ -61,7 +61,7 @@ class EVM:
             29: self._sar,
             30: self._address,
             31: self._balance,
-            32: self_sha3,
+            32: self._sha3,
             48: self._address,
             49: self._balance,
             50: self._origin,
@@ -600,6 +600,158 @@ class EVM:
         if type(operand_1) == int:
             operand_1 == hex(operand_1)
 
-        self._stack.append("{} == 0".format(opereand_1))
+        self._stack.append("{} == 0".format(operand_1))
 
+    def _evm_and(self):
+        operand_1 = self._stack_pop()
+        operand_2 = self._stack_pop()
+
+        if type(operand_1) == int:
+            operand_1 = hex(operand_1)
+        if type(operand_2) == int:
+            operand_2 = hex(operand_2)
+        
+        self._stack.append("{} & {}".format(operand_1, operand_2))
+    
+    def _evm_or(self):
+        operand_1 = self._stack_pop()
+        operand_2 = self._stack_pop()
+
+        if type(operand_1) == int:
+            operand_1 = hex(operand_1)
+        
+        if type(operand_2) == int:
+            operand_2 = hex(operand_2)
+    
+        self._stack.append("{} | {}".format(operand_1, operand_2))
+    
+    def _xor(self):
+        operand_1 = self._stack_pop()
+        operand_2 = self._stack_pop()
+
+        if type(operand_1) == int:
+            operand_1 = hex(operand_1)
+        
+        if type(operand_2) == int:
+            operand_2 = hex(operand_2)
+        
+        self._stack.append("{} ^ {}".format(operand_1, operand_2))
+    
+    def _evm_not(self):
+        operand_1 = self._stack_pop()
+
+        if type(operand_1) == int:
+            operand_1 = hex(operand_1)
+        
+        self._stack.append("~{}".format(operand_1))
+
+    def _byte(self):
+        operand_1 = self._stack_pop()
+        operand_2 = self._stack_pop()
+
+        if type(operand_2) == int:
+            operand_2 = hex(operand_2)
+        
+        self._stack.append("({} >> (248 - {} * 8)) & 0xFF".format(operand_1, operand_2))
+    
+    def _shl(self):
+        operand_1 = self._stack_pop()
+        operand_2 = self._stack_pop()
+
+        if type(operand_2) == int:
+            operand_2 = hex(operand_2)
+
+        self._stack.append("{} << {}".format(operand_2, operand_1))
+    
+    def _shr(self):
+        operand_1 = self._stack_pop()
+        operand_2 = self._stack_pop()
+
+        if type(operand_2) == int:
+            operand_2 = hex(operand_2)
+        
+        self._stack.append("{} >> {}".format(operand_2, operand_1))
+    
+    def _sar(self):
+        # pass
+        operand_1 = self._stack_pop()
+        operand_2 = self._stack_pop()
+        # do we need 3 operands?
+        operand_3 = self._stack_pop()
+
+        if type(operand_2) == int:
+            operand_2 = hex(operand_2)
+
+        if type(operand_3) == int:
+            operand_3 = hex(operand_3)
+
+        self._stack.append("{} >> {}".format(operand_2, operand_3, operand_1))
+
+    def _sha3(self):
+        operand_1 = self._stack_pop()
+        operand_2 = self._stack_pop()
+
+        if type(operand_1) == int and type(operand_2) == int:
+            operand_2 = hex(operand_1 + operand_2)
+            operand_1 = hex(operand_1)
+
+        elif type(operand_1) == int:
+            operand_1 = hex(operand_1)
+            operand_2 = operand_1 + " + " + operand_2
+
+        elif type(operand_2) == int:
+            operand_2 = operand_1 + " + " + hex(operand_2)
+        
+        else:
+            pass 
+            
+        self._stack.append("hash(memory[{}:{}])".format(operand_1, operand_2))
+    
+    def _address(self):
+        self._stack.append("address(\n' T: \n')")
+    
+    def _balance(self):
+        operand_1 = self._stack_pop()
+
+        if type(operand_1) == int:
+            operand_1 = hex(operand_1)
+        
+        self._stack.append('address(' + operand_1 + ').balance')
+
+    def _origin(self):
+        self._stack.append("tx.origin")
+    
+    def _caller_(self):
+        self._stack.append("msg.caller")
+    
+    def _callvalue(self):
+        self._stack.append("msg.value")
+    
+    def _calldataload(self):
+        operand_1 = self._stack_pop()
+
+        if type(operand_1) == int:
+            operand_2 = hex(operand_1 + 0x30) # or 0x20
+            operand_1 = hex(operand_1)
+        else:
+            operand_2 = operand_1 + " + 0x30"
+        
+        self._stack.append("msg.data[{}:{}]".format(operand_1, operand_2))
+    
+    def _calldatasize(self):
+        self._stack.append("msg.data.size")
+    
+    def _calldatacopy(self):
+        for _ in range(3):
+            self._stack_pop()
+    
+    def _codesize(self):
+        self._stack.append("address(this).code.size")
+    
+    def _codecopy(self):
+        for _ in range(3):
+            self._stack_pop()
+    
+    def _gasprice(self):
+        self._stack.append("tx.gasprice")
 print("**PASSED*")
