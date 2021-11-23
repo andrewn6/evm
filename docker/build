@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t evm -f Dockerfile ../
+docker build -t evm-py -f Dockerfile ../
