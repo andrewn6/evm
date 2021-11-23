@@ -754,4 +754,30 @@ class EVM:
     
     def _gasprice(self):
         self._stack.append("tx.gasprice")
+    
+    def _extcodesize(self):
+        operand_1 = self._stack_pop()
+        if type(operand_1) == int:
+            operand_1 = hex(operand_1)
+        
+        self._stack.append("address({}).code.size".format(operand_1))
+
+    def _extcodecopy(self):
+        for _ in range(4):
+            self._stack_pop()
+    
+    def _returndatasize(self):
+        self._stack.append("RETURNDATA_SIZE()")
+    
+    def _returndatacopy(self):
+        for _ in range(3):
+            self._stack_pop()
+    
+    def _extcodehash(self):
+        operand_1 = self._stack_pop()
+        
+        if type(operand_1) == int:
+            operand_1 = hex(operand_1)
+
+        self
 print("**PASSED*")
