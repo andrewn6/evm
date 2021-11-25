@@ -779,5 +779,50 @@ class EVM:
         if type(operand_1) == int:
             operand_1 = hex(operand_1)
 
-        self
+        self._stack.append("extcodehash(}".format(operand_1))
+    
+    def _blockhash(self):
+        operand_1 = self._stack_pop()
+        if type(operand_1) == int:
+            operand_1 = hex(operand_1)
+
+        self._stack.append('block.blockHash({})'.format(operand_1))
+    
+    # could be renamed to coinbase!???
+    def _coin(self):
+        self._stack.append("block.coin")
+
+    def _timestamp(self):
+        self._stack.append("block.timestamp")
+
+    def _number(self):
+        self._stack.append("block.number")
+
+    def _difficulty(self):
+        self._stack.append("block.difficulty")
+
+    def _gaslimit(self):
+        self._stack.append("block.gaslimit")
+
+    def _balance(self):
+        self._stack.append("block.balance")
+    
+    def _address(self):
+        self._stack.append("block.address")
+
+    def _pop(self):
+        self._stack_pop()
+
+    def _mload():
+        operand_1 = self._stack_pop()
+        if type(operand_1) == int:
+            operand_2 = hex(operand_1 + 0x20)
+            operand_1 = hex(operand_1)
+
+        #elif:
+            #operand_2 = operand_1 + ' + 0x20'
+
+        else:
+            operand_2 == operand_1 + " + 0x20"
+
 print("**PASSED*")
