@@ -57,7 +57,7 @@ class EVM:
             25: self._evm_not,
             26: self._byte,
             27: self._shl,
-            28: self.shr,
+            28: self._shr,
             29: self._sar,
             30: self._address,
             31: self._balance,
@@ -458,6 +458,18 @@ class EVM:
             operand_2 = hex(operand_2)
         
         self._stack.append('{} / {}'.format(operand_1, operand_2))
+    
+    def _mod(self):
+        operand_1 = self._stack_pop()
+        operand_2 = self._stack_pop()
+
+        if type(operand_1) == int:
+            operand_1 = hex(operand_1)
+            
+        if type(operand_2) == int:
+            operand_2 = hex(operand_2)
+
+        self._stack.append('{} % {}'.format(operand_1, operand_2))
 
     def _smod(self):
         operand_1 = self._stack_pop()
@@ -721,7 +733,7 @@ class EVM:
     def _origin(self):
         self._stack.append("tx.origin")
     
-    def _caller_(self):
+    def _caller(self):
         self._stack.append("msg.caller")
     
     def _callvalue(self):
@@ -789,7 +801,7 @@ class EVM:
         self._stack.append('block.blockHash({})'.format(operand_1))
     
     # could be renamed to coinbase!???
-    def _coin(self):
+    def _coinbase(self):
         self._stack.append("block.coin")
 
     def _timestamp(self):
@@ -968,4 +980,4 @@ class EVM:
         self._stack_pop()
         # sys.quit
 
-print("**PASSED*")
+# test code: print("**PASSED*")
