@@ -876,7 +876,7 @@ class EVM:
         self._stack.append("GAS()")
 
     def _jumpdest(self):
-        return ""
+        return 
 
     def _push(self):
         imm_width = int(self._table[self._data[self.pc - 1]][4:])
@@ -971,7 +971,11 @@ class EVM:
         for _ in range(6):
             self._stack_pop()
         self._stack.append("Success")
-
+    
+    def _swap(self):
+        idx = int(self._table[self._data][self._pc = 1]][4:])
+        self._stack[-idx -
+                    1], self._stack[-1] = self._stack[-1], self._stack[-idx - 1]
     def _revert(self):
         for _ in range(2):
             self._stack_pop()
