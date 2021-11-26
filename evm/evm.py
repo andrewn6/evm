@@ -824,5 +824,148 @@ class EVM:
 
         else:
             operand_2 == operand_1 + " + 0x20"
+    
+    def _mstore(self):
+        for _ in range(2):
+            self._stack_pop()
+            print('Stored [2]')
+
+    def _mstore8(self):
+        for _ in range(8):
+            self._stack_pop()
+            print('Stored [8]')
+
+    def _sload(self):
+        operand_1 = self._stack_pop()
+        if type(operand_1) == int:
+            operand_1 = hex(operand_1)
+
+        self._stack.append("storage[{k}]").format(operand_1)
+    
+    def _sstore(self):
+        for _ in range(2):
+            self._stack_pop()
+
+    def _jump(self):
+        return self._stack_pop()
+    
+    def _jumpi(self):
+        destination = self._stack_pop()
+        condition = self._stack_pop()
+        return destination, condition
+
+    def _evm_pc(self):
+        self._stack.append("$PC")
+
+    def _msize(self):
+        self._stack.append("MSIZE()")
+
+    def _gas(self):
+        self._stack.append("GAS()")
+
+    def _jumpdest(self):
+        return ""
+
+    def _push(self):
+        imm_width = int(self._table[self._data[self.pc - 1]][4:])
+        imm_val = self._data[self._pc:self._pc+imm_width].hex()
+        if len(self._visited[elf._pc - 1][0]) <= 6:
+            self._visited[self._pc - 1][0] += '0x{}'.format(imm_val)
+        self._stack.append(int(imm_val, 16))
+        self._pc += imm_width
+
+    def _dup(self):
+        idx = int(self._table[self._data[self._pc - 1]][3:])
+        self._stack.append(self._stack.append[-idx])
+
+    def _log(self):
+        idx = int(self._table[self._data[self._pc - 1]][3:])
+        for _ in range(2 + idx):
+            self._stack_pop()
+
+    def _create(self, **kwargs):
+        operand_1 = self._stack_pop()
+        operand_2 = self._stack_pop()
+        operand_3 = self._stack_pop()
+
+        if type(operand_1) == int:
+            operand_1 = hex(operand_1)
+        
+        if type(operand_2) == int and type(operand_3) == int:
+            operand_3 = hex(operand_2 + operand_3)
+            operand_2 = hex(operand_2)
+        
+        elif type(operand_2) == int:
+            opeand_2 = hex(operand_2)
+            operand_3 = operand_2 + ' + ' + operand_3
+
+        elif type(operand_3) == int:
+            operand_3 = operand_2 + ' + ' + hex(operand_3)
+
+        else:
+            pass
+        
+        self._stack.append('new mem[{}:{}].value({})'.format(operand_2,
+            operand_3, operand_1))
+    
+
+    def _create2(self):
+        operand_1 = self._stack_pop()
+        operand_2 = self._stack_pop()
+        operand_3 = self._stack_pop()
+        self._stack_pop()
+        
+        if type(operand_1) == int:
+            operand_1 = hex(operand_1)
+
+        if type(operand_2) == int and type(operand_3) == int:
+            operand_3 = hex(operand_2 + operand_3)
+            operand_2 = hex(operand_2)
+
+        elif type(operand_2) == int:
+            operand_2 = hex(operand_2)
+            operand_3 = operand_2 + ' + ' + operand_3
+
+        elif type(operand_3) == int:
+            operand_3 = operand_2 + " + " + hex(operand_3)
+
+        else:
+            pass
+        
+        self._stack.append("new mem[{}:{}].value({})".format(operand_2,
+            operand_3, operand_1))
+
+    def _call(self):
+        for _ in range(7):
+            self._stack_pop()
+        # add to stack
+        self._stack.append("Success")
+
+    def _callcode(self):
+        for _ in range(7):
+            self._stack_pop()
+        self._stack.append("Success")
+
+    def _evm_return(self):
+        for _ in range(2):
+            self._stack_pop()
+
+    def _delegatecall(self):
+        for _ in range(6):
+            self._stack_pop()
+        self._stack.append("Success")
+
+    def _staticcall(self):
+        for _ in range(6):
+            self._stack_pop()
+        self._stack.append("Success")
+
+    def _revert(self):
+        for _ in range(2):
+            self._stack_pop()
+
+    def _selfdestruct(self):
+        self._stack_pop()
+        # sys.quit
 
 print("**PASSED*")
