@@ -30,7 +30,7 @@ class EVM:
             self._table = {
                     int(k): v for k, v in json.load(opcode).items()}
         self._terminal_ops = ['*STOP', '*RETURN', '*REVERT', '*BALANCE']
-        self._jumps_ops = ["*JUMP", "*JUMPI"]
+        self._jump_ops = ['*JUMP', '*JUMPI']
 
         self._opcodes_func = {
             0: self._stop,
@@ -179,7 +179,7 @@ class EVM:
             255: self._selfdestruct,
         }
     
-    def _insert_entry_list_dic(self, dict, k, v):
+    def _insert_entry_list_dict(self, dict, k, v):
         if k not in dict:
             dict[k] = []
         if v not in dict[k]:
@@ -271,8 +271,10 @@ class EVM:
 
 
     def _annotation_jump(self, addr, cond):
-        return '// Incoming jump from 0x{:04X}'.format(addr),
-        cond
+        return ( 
+            '// Incoming jump from 0x{:04X}'.format(addr),                  
+            cond
+        )
 
     def _annotation_call(self):
         return (
@@ -292,8 +294,9 @@ class EVM:
             None
         )
     def disassemble(self):
+
         self._recursive_run()
-        self.linear_run()
+        self._linear_run()
         return self._visited, self._blocks, self._func_list
     
     def _recursive_run(self):
@@ -329,7 +332,7 @@ class EVM:
                         self._blocks,
                         self._pc,
                         # might have to concatenate not into cond 
-                        self._annotation_jump(self._pc - 1, "not" + str(cond))
+                        self._annotation_jump(self._pc - 1, 'not ' + cond)
                     )
 
                     if type(jump_addr) != int:
@@ -339,7 +342,7 @@ class EVM:
                     self._insert_entry_list_dict(
                         self._blocks,
                         jump_addr,
-                        self._annotation_call(self._pc, - 1, cond)
+                        self._annotation_call()
                     )
 
                 else:
@@ -525,8 +528,7 @@ class EVM:
 
         self._stack.append('({} * {}) % {}'.format(operand_1, operand_2,
             operand_3))
-
-    
+ 
     def _exp(self):
         operand_1 = self._stack_pop()
         operand_2 = self._stack_pop()
@@ -884,9 +886,9 @@ class EVM:
         return 
 
     def _push(self):
-        imm_width = int(self._table[self._data[self.pc - 1]][4:])
+        imm_width = int(self._table[self._data[self._pc - 1]][4:])
         imm_val = self._data[self._pc:self._pc+imm_width].hex()
-        if len(self._visited[elf._pc - 1][0]) <= 6:
+        if len(self._visited[self._pc - 1][0]) <= 6:
             self._visited[self._pc - 1][0] += '0x{}'.format(imm_val)
         self._stack.append(int(imm_val, 16))
         self._pc += imm_width

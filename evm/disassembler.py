@@ -1,24 +1,24 @@
 import sys
 import os
-#import capstone
+# import capstone
 from evm import EVM
 # import convert_bytecode
 
 def get_list_with_prefix(prefix, len):
-    return ["{}{}".format(prefix, i) for i in range(len)]
+    return ['{}{}'.format(prefix, i) for i in range(len)]
 
 if __name__ == "__main__":
-    evm = EVM(bytes.fromhex(input('>> Enter your hex. ')))
+    evm = EVM(bytes.fromhex(input('>> Enter your hex: ')))
     insts, func_list, blocks = evm.disassemble()
     
     with open("output", "w") as output:
         output.write("FUNCTIONS:\n")
-        for addr, infpo in sorted(func_list.items()):
+        for addr, info in sorted(func_list.items()):
             output.write(
                     "   FUNC_{:04X}({}) -> ({})\n"
                     .format(
                         addr,
-                        ', '.join(get_list_with_prefix("arg", info[0])),
+                        ', '.join(get_list_with_prefix('arg', info[0])),
                         '. '.join(get_list_with_prefix("r", info[1])),
                     )
             )
