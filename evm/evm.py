@@ -301,7 +301,7 @@ class EVM:
     
         # while queue is not empty do recursive traversal disassemble
         while not self._queue.empty():
-            self.get_new_analysis_entry()
+            self._get_new_analysis_entry()
 
             while self._pc < len(self._data) and self._check_visited():
                 cur_op = self._data[self._pc]
@@ -312,7 +312,7 @@ class EVM:
                     inst = self._table[cur_op]
                     self._mark_visited(inst)
                     self._pc += 1
-                if inst not in self.jump_ops:
+                if inst not in self._jump_ops:
                     self._stack_func(cur_op)
 
                     if inst in self._terminal_ops:
@@ -547,6 +547,11 @@ class EVM:
             operand_2 = hex(operand_2)
 
         self._stack.append('SIGNEXTEND({}, {})'.format(operand_1, operand_2))
+    
+    def _get_new_analysis_entry(self):
+        entry = self._queue.get()
+        self._pc = entry[0]
+        self._stack = entry[1]
 
     def _lt(self):
         operand_1 = self._stack_pop()
@@ -973,9 +978,9 @@ class EVM:
         self._stack.append("Success")
     
     def _swap(self):
-        idx = int(self._table[self._data][self._pc = 1]][4:])
-        self._stack[-idx -
-                    1], self._stack[-1] = self._stack[-1], self._stack[-idx - 1]
+        idx = int(self._table[self._data[self._pc - 1]][4:])
+        self._stack[-idx - 1], self._stack[-1] = self._stack[-1], self._stack[-idx - 1]
+
     def _revert(self):
         for _ in range(2):
             self._stack_pop()
