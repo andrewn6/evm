@@ -8,7 +8,7 @@ def get_list_with_prefix(prefix, len):
     return ['{}{}'.format(prefix, i) for i in range(len)]
 
 if __name__ == "__main__":
-    evm = EVM(bytes.fromhex(input('>> Enter your hex: ')))
+    evm = EVM(bytes.fromhex(input('>> Enter hex: ')))
     insts, func_list, blocks = evm.disassemble()
     
     with open("output", "w") as output:
@@ -19,7 +19,7 @@ if __name__ == "__main__":
                     .format(
                         addr,
                         ', '.join(get_list_with_prefix('arg', info[0])),
-                        '. '.join(get_list_with_prefix("r", info[1])),
+                        '. '.join(get_list_with_prefix('r', info[1])),
                     )
             )
 
@@ -40,5 +40,3 @@ if __name__ == "__main__":
                             output.write(", if {}".format(xref[1]))
 
             output.write("\n 0x{:04X}: []".format(addr, visited[0]))
-        
-
