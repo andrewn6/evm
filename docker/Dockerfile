@@ -21,5 +21,4 @@ RUN ln -sf /evm/evm /usr/local/bin/evm
 
 COPY . .
 
-# test & build the evm disassembler.
-RUN ./run_disassembler.py
+RUN python ../evm/evm.py
