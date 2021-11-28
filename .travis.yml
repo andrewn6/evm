@@ -22,8 +22,8 @@ addons:
       - python-virtualenv
 
 install:
-  - ./evm_install
+  - ./evm_install.sh
 
 
 script:
-  - ./run_tests 
+  - ./run_tests.sh 

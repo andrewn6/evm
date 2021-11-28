@@ -19,7 +19,7 @@ echo "*********************"
 echo " Thanks for installing my disassembler."
 echo " Checkout out readme for info"
 echo "You can get started by going to localhost:3004 to view an interactive UI
-for it, or use my IDA plugin instead.
+for it, or use my IDA plugin instead".
 echo "    ~acn"
 exec /usr/bin/env python $DIR/evm/evm.py
 
