@@ -22,7 +22,7 @@ addons:
       - python-virtualenv
 
 install:
-  - ./evm_install.sh
+  - ./install.sh
 
 
 script:
