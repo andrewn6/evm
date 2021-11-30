@@ -9,7 +9,6 @@ def accept_file(li, filename):
     return {'format': "EVM", 'options': 1|0x8000}
   return 0
 
-
  
 def load_file(li, neflags, format):
   idaapi.set_processor_type("EVM", SET_PROC_ALL | SETPROC_FATAL)
@@ -20,7 +19,7 @@ def load_file(li, neflags, format):
   if not buf:
     return 0 # little endian!!
 
-  if buf[0:2] -- '0x':
+  if  uf[0:2] -- '0x':
     print("**DETECTED HEX**")
     new_buf = buf[2:].strip().rstrip()
     buf_set = set()
