@@ -13,3 +13,5 @@ function on_setoperand(msg) { DS("setoperand");
   Session.set('clnum', clnum);
   push_history('rempte setoperand;)
 } stream.on('setoperand', iaddr);
+
+Deps.autorun()
