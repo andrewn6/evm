@@ -21,4 +21,4 @@ RUN ln -sf /evm/evm /usr/local/bin/evm
 
 COPY . .
 
-RUN python ../evm/evm.py
+RUN ./run_tests.sh
