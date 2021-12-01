@@ -1,3 +1,10 @@
 #!/bin/bash
 
 SDKROOT=$IDA_SDK
+unamestr=$(uname)
+if [[ "$unamestr" == "Linux" ]]; then
+  IDAROOT=$IDA_DIR
+  OUTPUT="evm.plx"
+  # 64 bit 
+  OUTPUT64="evm.plx64
+  ln -sf 
