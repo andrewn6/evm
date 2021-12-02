@@ -7,4 +7,10 @@ if [[ "$unamestr" == "Linux" ]]; then
   OUTPUT="evm.plx"
   # 64 bit 
   OUTPUT64="evm.plx64
-  ln -sf 
+  ln -sf lib/linux_websockets.a websockets.a
+elif [[ "$unamestr" == 'Darwin' ]]; then
+  IDAROOT="/Applications/IDA Pro 7.6/idaq.app/Contents/MacOS/"
+  OUTPUT="evm.pmc"
+  OUTPUT64="evm.pmc64"
+  ln -sf lib/mac_websockets.a websockets.a
+fi

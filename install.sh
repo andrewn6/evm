@@ -15,11 +15,11 @@ else
 fi
 
 unset PYTHONPATH
-echo "*********************"
+echo "***********************"
 echo " Thanks for installing my disassembler."
 echo " Checkout out readme for info"
-echo "You can get started by going to localhost:3004 to view an interactive UI
-for it, or use my IDA plugin instead".
+echo "You can get started by going to localhost:300, or you can also use my IDA
+plugin.."
 echo "    ~acn"
 exec /usr/bin/env python $DIR/evm/evm.py
 
