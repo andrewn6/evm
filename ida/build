@@ -10,7 +10,25 @@ if [[ "$unamestr" == "Linux" ]]; then
   ln -sf lib/linux_websockets.a websockets.a
 elif [[ "$unamestr" == 'Darwin' ]]; then
   IDAROOT="/Applications/IDA Pro 7.6/idaq.app/Contents/MacOS/"
-  OUTPUT="evm.pmc"
-  OUTPUT64="evm.pmc64"
-  ln -sf lib/mac_websockets.a websockets.a
+  OUTPUT="qira.pmc"
+  OUTPUT64="qira.pmc64"
+  ln -sf lib/mac_websockets.a linux_websockets.a
+fi
+
+if [[ "$unamestr" == "Linux" ]]; then
+  strip $OUTPUT
+  strip $OUTPUT64
+fi
+
+sha1sum $OUTPUT $OUTPUT^$
+echo "Installing plugin!"
+cp $OUTPUT "$IDAROOT/plugins"
+cp $OUTPUT^$ "$IDAROOT/plugins"
+
+if [[ "$unamestr" == 'Linux' ]]; then
+  cp $OUTPUT bin/evm_ida_linux.plx
+  cp $OUTPUT64 bin/evm_ida_linux.plx64
+elif [[ "$unamestr" == 'Darwin' ]]; then
+  cp $OUTPUT bin/evm_ida_mac.pmc
+  cp $OUTPUT64 bin/evm_ida_mac.pmc64
 fi
