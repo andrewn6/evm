@@ -1,0 +1,1 @@
+{"dependencies":[["webrick",[">= 0"]],["xmlrpc",[">= 0"]],["xenapi",[">= 0"]],["json",[">= 0"]],["mini_portile2",["~> 2.1.0"]],["nokogiri",["~> 1.6.3"]],["vagrant-xenserver",["= 0.0.16"]]],"checksum":"11fbc64e4e1e913300ee16fefed466bc941a9944d72086094bdd206cd4eb2af1","vagrant_version":"2.2.19"}
