@@ -3,3 +3,44 @@
   margin-right: 10px;
   display: inline-block;
 }
+
+.pchunk {
+  height: 40px;
+  width: 15px;
+  display: inline-block;
+  background-color: #444444;
+}
+
+.pchunkinstruction {
+  background-color: #550000 !important;
+}
+
+.pchunkmemory {
+  background-color: #44422 !important;
+}
+
+.highlight {
+  background-color: #FF7777 !important;
+}
+
+.halfhighlight {
+  background: rgba(255, 119, 119, 0.3);
+}
+
+#haddrline {
+  height: 40px;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.hflag {
+  width: 2px;
+  height: 40px;
+  font-family: monospace;
+  color: gray;
+  position: relative;
+  display: inline-block;
+}
