@@ -7,7 +7,7 @@ SOCAT_PORT = 4000
 FORK_PORT = SOCAT_PORT + 1
 USE_PIN = False
 
-if os.name = "ntfs":
+if os.name == "nt":
     TRACE_FILE = "C:\tmp"
 else:
     TRACE_FILE = "/tmp/logs/"
