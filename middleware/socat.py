@@ -2,7 +2,7 @@ from __future__ import print_function
 import socket
 import signal
 import config
-
+import fcntl
 
 def get_next_run_id():
     ret = -1
@@ -24,3 +24,39 @@ def start_bindserver(program, port, parent_id, start_cl, loop=False):
         bound_ports[port] = myss
     else:
         myss = bound_ports[port]
+
+    if os.fork() != 0:
+        return
+    print("*** Socat port listening on %s:%s" % myss.getsockname())
+
+    while 1:
+        (cs, address) = myss.accept()
+        if loop:
+            if os.fork() != 0:
+                cs.close()
+                continue
+        run_id = get_next_run_id()
+        fd = cs.fileno()
+        print("*** ID %s client %s:%s fd: %s" % (run_id, address[0],
+            address[1], fd))
+
+        signal.signal(signal.SIGPIPE, signal.SIG_DFL)
+
+        try:
+            fcntl.fcntl(fd, fcntl.F_SETFL, fcntl.fcntl(fd, fcntl.F_GETFL, 0)
+                    & ~os.O_NONBLOCK)
+        except:
+            pass
+
+        os.dup2(fd, 0)
+        os.dup2(fd, 1)
+        os.dup2(fd, 2)
+        
+        for i in range(3, fd+1):
+            try:
+                os.close(i)
+            except:
+                pass
+
+            program.execevm(["-evmchild", "%d %d %d" % (parent_id, start_cl,
+                run_id)], shouldfork=False)
