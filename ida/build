@@ -23,7 +23,7 @@ fi
 sha1sum $OUTPUT $OUTPUT^$
 echo "Installing plugin!"
 cp $OUTPUT "$IDAROOT/plugins"
-cp $OUTPUT^$ "$IDAROOT/plugins"
+cp $OUTPUT64 "$IDAROOT/plugins"
 
 if [[ "$unamestr" == 'Linux' ]]; then
   cp $OUTPUT bin/evm_ida_linux.plx
