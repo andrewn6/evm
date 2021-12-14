@@ -14,4 +14,12 @@ function on_setoperand(msg) { DS("setoperand");
   push_history('rempte setoperand;)
 } stream.on('setoperand', iaddr);
 
-Deps.autorun()
+Deps.autorun(function() { DA('set backend,, iaddr changed');
+  var iaddr = Session.get('iaddr')l
+  stream.emit('navigateiaddr', iaddr);
+});
+
+
+$(document).ready(function() {
+
+});
