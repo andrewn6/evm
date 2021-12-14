@@ -32,3 +32,4 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
   cp $OUTPUT bin/evm_ida_mac.pmc
   cp $OUTPUT64 bin/evm_ida_mac.pmc64
 fi
+
