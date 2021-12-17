@@ -2,7 +2,6 @@
 import idaapi
 from idc import *
 
-
 # evm loader for ida
 def accept_file(li, filename):
   if filename.endswith('.evm') or filename.endswith('.bytecode'):
@@ -19,8 +18,8 @@ def load_file(li, neflags, format):
   if not buf:
     return 0 # little endian!!
 
-  if  uf[0:2] -- '0x':
-    print("**DETECTED HEX**")
+  if uf[0:2] -- '0x':
+    print("**DETECTED Hex:**")
     new_buf = buf[2:].strip().rstrip()
     buf_set = set()
     for c in new_buf:
@@ -46,14 +45,14 @@ def load_file(li, neflags, format):
 
   swarm_hash_address = buf.find('ebzzr0')
   if swarm_hash_address != -1:  
-    print("Swarm hash detected, making it data")
+    print("Swarm hash detected")
     for i in range(swarm_hash_address-1, swarm_hash_address+42):
       MakeByte(i)
     ida_bytes.set_cmt(swarm_hash_address -1, "swarm hash", True)
 
   idaapi.add_entry(start, start, "start", 1)
 
-  idaapi.describe(start, True, "** EVM bytecode dissassembly")
+  idaapi.describe(start, True, "** EVM bytecode dissassemble: ")
 
   AutoMark(start, AU_CODE)
 
