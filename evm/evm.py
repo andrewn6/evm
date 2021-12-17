@@ -2,7 +2,7 @@ import json
 from copy import deepcopy
 import queue
 
-class EVM:
+class Evm:
     FUNC_NOT_ANALYSED = 0xFFFF
     # set to 10 by default, can be lower
     MAX_DISASSEMBLE_TRIES = 0x10

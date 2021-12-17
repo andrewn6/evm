@@ -1,4 +1,4 @@
-from evm import EVM
+from evm import Evm
 # import capstone
 # import convert_bytecode
 
@@ -7,8 +7,8 @@ def get_list_with_prefix(prefix, len):
 
 
 if __name__ == '__main__':
-    evm = EVM(bytes.fromhex(input('>> ')))
-    insts, func_list, blocks = evm.disassemble()
+    vm = Evm(bytes.fromhex(input('>> Hex: ')))
+    insts, func_list, blocks = vm.disassemble()
 
     with open('output', 'w') as output:
         output.write('FUNCTIONS:\n\n')
