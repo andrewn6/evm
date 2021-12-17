@@ -386,7 +386,7 @@ class Evm:
                 self._pc += 1
 
                 if inst.startswith("PUSH"):
-                    imm_width= int(width[4:])
+                    imm_width= int(inst[4:])
                     imm_val = self._data[self._pc:self._pc
                             + imm_width].hex().str()
 
@@ -832,17 +832,19 @@ class Evm:
     def _pop(self):
         self._stack_pop()
 
-    def _mload():
+    def _mload(self):
         operand_1 = self._stack_pop()
+        
         if type(operand_1) == int:
             operand_2 = hex(operand_1 + 0x20)
             operand_1 = hex(operand_1)
-
-        #elif:
-            #operand_2 = operand_1 + ' + 0x20'
-
+        
         else:
-            operand_2 == operand_1 + " + 0x20"
+            operand_2 = operand_1 + ' + 0x20'
+
+        self._stack.append('memory[{}:{}]'.format(
+            operand_1, operand_2))
+        
     
     def _mstore(self):
         for _ in range(2):
