@@ -24,7 +24,7 @@ if __name__ == '__main__':
 
         output.write(
             '\n---\n'
-            'DISASSEMBLED RESULT:'
+            'DISASSEMBLED Result:'
         )
         for addr, visited in sorted(insts.items()):
             if addr in blocks:
