@@ -1,11 +1,14 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.10;
+
+// import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 contract ChainlinkPriceOracle {
     AggregatorV3Interface internal priceFeed;
 
     constructor() {
+        // ETH / USD
         priceFeed = AggregatorV3Interface(0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419);
-
     }
 
     function getLatestPrice() public view returns (int) {
@@ -16,14 +19,14 @@ contract ChainlinkPriceOracle {
             uint timeStamp,
             uint80 answeredInRound
         ) = priceFeed.latestRoundData();
-
+        // for ETH / USD price is scaled up by 10 ** 8
         return price / 1e8;
     }
 }
 
 interface AggregatorV3Interface {
     function latestRoundData()
-        external 
+        external
         view
         returns (
             uint80 roundId,
@@ -31,5 +34,5 @@ interface AggregatorV3Interface {
             uint startedAt,
             uint updatedAt,
             uint80 answeredInRound
-        );  
+        );
 }
