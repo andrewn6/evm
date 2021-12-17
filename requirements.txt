@@ -1,5 +1,4 @@
 interval3
-copy
 capstone
 certifi
 #evm-cfg-builder

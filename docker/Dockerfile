@@ -14,7 +14,7 @@ RUN apt-get -y install python3-pip
 RUN virtualenv venv
 RUN bash -c "source venv/bin/activate && pip3 install --upgrade pip"
 
-COPY ./requirements.txt ./requirements.txt
+COPY ../requirements.txt ../requirements.txt
 RUN bash -c "source venv/bin/activate && pip3 install --upgrade -r requirements.txt"
 
 RUN ln -sf /evm/evm /usr/local/bin/evm

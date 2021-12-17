@@ -1,7 +1,10 @@
 from copy import deepcopy
 import json
-import queue
-
+# https://stackoverflow.com/questions/46363871/no-module-named-queue
+try:
+    import queue
+except ImportError:
+    import Queue as queue
 
 class Evm:
     FUNC_NOT_ANALYSED = 0xFFFF
