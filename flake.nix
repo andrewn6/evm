@@ -1,5 +1,5 @@
 {
-  description = "EVM Disassmbler";
+  description = "EVM disassembler";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs";
@@ -16,7 +16,8 @@
       url = "github:DavHau/mach-nix/3.3.0";
     };
   };
-  outputs = { self, nixpkgs, flake-utils, mach-nix, pypi-deps-db }:
+  outputs = { self, darwin,  nixpkgs, flake-utils, mach-nix, pypi-deps-db }:
+    
     flake-utils.lib.eachDefaultSystem (system:
       let
         python = "python39";
