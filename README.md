@@ -14,3 +14,7 @@ Mac/Linux supported out of the box.
 
 Docker image should work everywhere..
 </pre>
+
+## Installing
+
+Clone repo
