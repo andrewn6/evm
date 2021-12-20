@@ -1,5 +1,10 @@
 #!/bin/bash -e
 
+# install the deps required
+if [ $(which apt-get) ]; then
+  echo "installing deps for mac"
+  brew install coreutils make gcc zlib git curl python3 python-dev
+  
 unamestr=$(uname)
 if [[ "$unamestr" == 'Linux' ]]; then
   DIR=$(dirname $(readlink -f $0))
