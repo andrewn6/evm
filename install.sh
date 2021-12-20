@@ -21,6 +21,6 @@ echo " Checkout out readme for info"
 echo "You can get started by going to localhost:3000, or you can also use my IDA
 plugin.."
 echo "    ~acn"
-exec /usr/bin/env python $DIR/evm/evm.py
+exec /usr/bin/env python $DIR/evm/disassembler.py
 
 
