@@ -4,7 +4,12 @@
 if [ $(which apt-get) ]; then
   echo "installing deps for mac"
   brew install coreutils make gcc zlib git curl python3 python-dev
-  
+
+else
+  echo "** Sorry! this installer is for Mac/Linux with Homebrew installed, you
+  can build it with python yourself."
+fi
+
 unamestr=$(uname)
 if [[ "$unamestr" == 'Linux' ]]; then
   DIR=$(dirname $(readlink -f $0))
@@ -22,10 +27,8 @@ fi
 unset PYTHONPATH
 echo "***********************"
 echo " Thanks for installing my disassembler."
-echo " Checkout out readme for info"
-echo "You can get started by going to localhost:3000, or you can also use my IDA
-plugin.."
+echo " Checkout out readme for info on how to get started"
 echo "    ~acn"
-exec /usr/bin/env python $DIR/evm/disassembler.py
+exec /usr/bin/env python $DIR/evm/evm.py
 
 

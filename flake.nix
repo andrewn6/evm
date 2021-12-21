@@ -1,5 +1,5 @@
 {
-  description = "EVM disassembler";
+  description = "EVM bytecode disassembler";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs";
@@ -16,15 +16,18 @@
       url = "github:DavHau/mach-nix/3.3.0";
     };
   };
-  outputs = { self, darwin,  nixpkgs, flake-utils, mach-nix, pypi-deps-db }:
-    
+  outputs = { self, nixpkgs, flake-utils, mach-nix, pypi-deps-db }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         python = "python39";
 
         inherit (nixpkgs.lib) concatStringsSep;
 
-        pkgs = import nixpkgs { inherit system; };
+        pkgs = import nixpkgs {
+          config = {};
+          system = "aarch64-darwin";
+        };
+
         mach = import mach-nix { inherit pkgs python; };
 
         devRequirements = ''
@@ -83,3 +86,4 @@
         };
       });
 }
+
