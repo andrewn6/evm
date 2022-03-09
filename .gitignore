@@ -13,6 +13,7 @@ __pycache__/
 # C extensions
 *.so
 
+ida/
 # Distribution / packaging
 .Python
 build/
