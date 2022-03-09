@@ -2,20 +2,9 @@
 
 [![Build Status](https://travis-ci.org/anddddrew/evm.svg?branch-master)](https://travis-ci.org/anddddrew/evm)
 
+An EVM disassembler codded in python, you can disasemble with bytecode.
 
-## Features
-* Disassemble with bytecode
-* IDA Plugin (view ida/)
-* Recursive decent algorithim for disassembly.
-* Docker support
-
-<pre>
-Mac/Linux supported out of the box.
-
-Docker image should work everywhere..
-</pre>
-
-## Installing
+## Using
 
 Clone the repo
 ```git clone https://github.com/anddddrew/evm.git```
