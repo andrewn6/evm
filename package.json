@@ -1,0 +1,11 @@
+{
+  "name": "evm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:anddddrew/evm.git",
+  "author": "Andrew <andrewnijmeh1@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "prettier": "^2.6.2"
+  }
+}
