@@ -9,14 +9,17 @@ An EVM disassembler codded in python, you can disasemble with bytecode.
 Clone the repo
 ```git clone https://github.com/anddddrew/evm.git```
 
-Run the installer
-```./install```
+Change directories
+```
+cd evm
+```
 
-After this you should have a prompt, and you can start using the disassembler :).
+Run script
+```
+python disassembler.py
+```
+After this you should have a prompt to enter your operands.
 
 *NOTE: all disassembly output from the script will be in a file called "output"*
 
-## Releases
-* 1.2 -- Ida plugin done, bug fixes coming on the way. Added better error handling, small bug fix in the main program.
-* 1.1 -- Progress on IDA plugin, dumped hashes. Can disassemble from hex's now
-* 1.0 -- Main disassembler working, very basic. Able to disassemble from bytecode only
+
