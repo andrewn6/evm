@@ -3,14 +3,14 @@ sudo: true
 language: python
 
 python:
-  -  "3.6"
-  -  "3.7"
-  -  "3.8"
+  - "3.6"
+  - "3.7"
+  - "3.8"
 
 addons:
   apt:
     sources:
-    - ubuntu-toolchain-r-test
+      - ubuntu-toolchain-r-test
 
     packages:
       - gcc
@@ -23,6 +23,3 @@ addons:
 
 install:
   - ./install.sh
-
-
-
