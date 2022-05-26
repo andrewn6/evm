@@ -25,5 +25,4 @@ install:
   - ./install.sh
 
 
-script:
-  - ./run_tests.sh 
+
