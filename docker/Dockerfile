@@ -1,24 +1,11 @@
-FROM ubuntu:18.04
+FROM ubuntu:latest
 
 LABEL maintainer="andrewnijmeh1@gmail.com"
-LABEL description="Disassembling the EVM."
+LABEL description="EVM disassembly via bytecode in Python"
 
-COPY . /evm
 WORKDIR /evm
-
-RUN apt-get upgrade
-RUN apt-get update && apt-get -y install gcc g++ git curl python-dev python-virtualenv  
-# Make sure to install pip3
-RUN apt-get -y install python3-pip
-
-RUN virtualenv venv
-RUN bash -c "source venv/bin/activate && pip3 install --upgrade pip"
-
-COPY ../requirements.txt ../requirements.txt
-RUN bash -c "source venv/bin/activate && pip3 install --upgrade -r requirements.txt"
-
-RUN ln -sf /evm/evm /usr/local/bin/evm
 
 COPY . .
 
-RUN ./run_tests.sh
+RUN apt-get update && apt-get install -y python3-pip nodejs npm
+
