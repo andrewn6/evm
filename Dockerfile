@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y python3-pip nodejs npm yarn curl gcc gi
 
 COPY . .
 
-RUN yarn install
-
 RUN pip3 install -r requirements.txt 
+
+RUN chmod +x ./build
+
+RUN ./build
