@@ -2,3 +2,6 @@ build
 node_modules
 .abi
 .pyc
+
+pnpm-lock.yaml
+.next
