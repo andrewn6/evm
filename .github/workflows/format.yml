@@ -22,10 +22,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - uses: pnpm/action-setup @v6.24.1
 
-        with:
-          version: 6.0.2
-
-      - run: pnpm install
-      - run: pnpm prettier --write .
+      - run: yarn install
+      - run: yarn prettier --write .
