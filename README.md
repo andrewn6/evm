@@ -1,6 +1,7 @@
 # EVM
 
-[![Build Status](https://travis-ci.org/anddddrew/evm.svg?branch-master)](https://travis-ci.org/anddddrew/evm)
+[![build](https://github.com/anddddrew/evm/actions/workflows/build.yml/badge.svg)](https://github.com/anddddrew/evm/actions/workflows/build.yml)
+[![format](https://github.com/anddddrew/evm/actions/workflows/format.yml/badge.svg)](https://github.com/anddddrew/evm/actions/workflows/format.yml)
 
 An EVM disassembler codded in python, you can disasemble with bytecode.
 
