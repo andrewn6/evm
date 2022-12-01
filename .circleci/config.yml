@@ -30,3 +30,7 @@ jobs:
           key: pnpm-packages-{{ checksum "pnpm-lock.yaml" }}
           paths:
             - node_modules
+workflows:
+  format-workflow:
+    jobs:
+      - format
