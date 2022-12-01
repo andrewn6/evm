@@ -2,8 +2,6 @@ interval3
 capstone
 certifi
 #evm-cfg-builder
-Flask
-Flask-SocketIO
 ipaddr
 idna
 websocket-client
@@ -13,6 +11,6 @@ requests
 Click
 python-engineio
 python-socketio
-# pyelftools (I don't parse via elf files yet, prob not needed)
-hexdump #
+hexdump 
 Werkzeug
+Flask
