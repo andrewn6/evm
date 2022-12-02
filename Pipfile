@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+interval3 = "*"
+capstone = "*"
+certifi = "*"
+ipaddr = "*"
+idna = "*"
+websocket-client = "*"
+six = "*"
+socketio-client = "*"
+requests = "*"
+click = "*"
+python-engineio = "*"
+python-socketio = "*"
+hexdump = "*"
+werkzeug = "*"
+flask = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
