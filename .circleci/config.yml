@@ -47,3 +47,10 @@ jobs:
 
       - run:
           command: chmod +x ./build.sh && ./build.sh
+ workflows:
+  format:
+    jobs:
+      - format  
+  build-evm:
+    jobs:
+        - build-evm    
