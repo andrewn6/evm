@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  python: circleci/python@2.1.1
+
 jobs:
   format:
     docker:
@@ -30,3 +33,17 @@ jobs:
           key: pnpm-packages-{{ checksum "pnpm-lock.yaml" }}
           paths:
             - node_modules
+
+  build-evm:
+    docker:
+      - image: python:3.9-alpine
+    resource_class: large
+    parallelism: 10
+
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+
+      - run:
+          command: chmod +x ./build.sh && ./build.sh
