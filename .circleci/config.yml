@@ -52,7 +52,7 @@ jobs:
 workflows:
   format:
     jobs:
-      - format  
+      - format
   build-evm:
     jobs:
-        - build-evm    
+      - build-evm

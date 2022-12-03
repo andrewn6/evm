@@ -5,7 +5,6 @@ name = "pypi"
 
 [packages]
 interval3 = "*"
-capstone = "*"
 certifi = "*"
 ipaddr = "*"
 idna = "*"
