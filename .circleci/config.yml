@@ -34,7 +34,7 @@ jobs:
           paths:
             - node_modules
 
-  build-evm:
+  evm:
     docker:
       - image: python:3.9-alpine
     resource_class: large
@@ -53,6 +53,6 @@ workflows:
   format:
     jobs:
       - format
-  build-evm:
+  evm:
     jobs:
-      - build-evm
+        - evm 
